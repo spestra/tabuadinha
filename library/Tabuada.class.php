@@ -1,14 +1,29 @@
 <?php
-
 /* 17:47 8/8/2012 */
+/* 16:06 18/8/2012 */
+
+/* 21/8/2012 */
+/* 12:54 22/8/2012 */
 
 class Tabuada {
+	private $tabuada_inicio;
+	private $tabuada_fim;
+	private $titulo_tabuada;
+	private $tabuada_array = array();
+	private $tabuada_operacao;
 
-	public $tabuada_num;
-	public $tabuada_ate;
+
+
 
 	
-	public function setTabuada() { 
+
+	
+	public function getTabuada() {
+
+
+
+	/* --------- tratamento inicio --------- */
+
 	
 	/* Faz a limpeza dos dados do input tabuada início */
 	if(isset($this->tabuada_num)) {
@@ -58,31 +73,64 @@ class Tabuada {
 	$tabuada_num_msg_erro = '  ';
 	
 
+	/* --------- tratamento fim --------- */
 
 
 
-/* Verifica se o número inicial é menor que o nº final */
-if(is_numeric($this->tabuada_num) AND is_numeric($this->tabuada_ate) 
- AND $this->tabuada_num <= $this->tabuada_ate 
-  AND $this->tabuada_num > 0) {
 
-/* Limite de tabuadas a serem exibidas */
-if(($this->tabuada_ate - $this->tabuada_num) <= 10) {
+	/* Verifica se o número inicial é menor que o nº final */
+	if(is_numeric($this->tabuada_num) AND is_numeric($this->tabuada_ate) 
+	 AND $this->tabuada_num <= $this->tabuada_ate 
+	  AND $this->tabuada_num > 0) {
+
+	/* Limite de tabuadas a serem exibidas */
+	if(($this->tabuada_ate - $this->tabuada_num) <= 10) {
+	 
+
+
+
+	 
+	 
+
+
+
+
+/* 12:54 22/8/2012 */
+
+$tabuada_inicio = 2;
+$tabuada_fim = 10;
+$tabuada_completa = array();
+
+
+for($i = $tabuada_inicio; $i <= $tabuada_fim; $i++) {
+$tabuada_titulo_texto = 'Tabuado do nº ' . $i;
+
+$calculo_atual = array();
+	for($j=1; $j<=10; $j++) {
+		$calculo_texto = $i . ' * ' . $j . ' = ';
+		$calculo_atual[] = $calculo_texto . $i * $j;
+	}
+$tabuada_completa[] = array($tabuada_titulo_texto => $calculo_atual);
+
+} // fecha for 
+
+$lululalau = ' ';
   
-	for($this->tabuada_num; $this->tabuada_num <= $this->tabuada_ate; $this->tabuada_num++) {
+foreach ($tabuada_completa as $k1 => $k2) {
+    foreach ($k2 as $titulo_tabuada => $tabuada_array) {
+		$this->tabuada_array[] = $tabuada_array;
+		//	print_r($tabuada_array);
+        $lululalau .= '<h1>' . $titulo_tabuada . '</h1><br>';
+    } $lululalau .=  "\n<ul>\n";
+		foreach($tabuada_array as $tabuada) {
+			$lululalau .= '<li>' . $tabuada . "</li>\n";
+		} $lululalau .= "</ul>\n\n";
+}
+  
 
-	echo "\n\n" . '<div class="tabuada_numero">';
-	echo "\n<!-- tabuada do " . $this->tabuada_num . " -->\n<ul> \n";
 
-		for($i=1; $i<=10; $i++) {
-		$tab_res_multi = $this->tabuada_num * $i;
-		echo '<li>' . $this->tabuada_num . ' X ' . $i . ' = ' . $tab_res_multi . "</li> \n";
-		}
 
-	echo "</ul> \n ";
-	echo '</div><!-- div tabuada_numero -->';
 
-	} /* fecha for */
 }  else {
 	$tabuada_num_msg_erro .= "\n ";
 	$tabuada_num_msg_erro .= 'O limite de tabuadas a serem exibidas é maior que 10.<br > Só pode ser mostrado no máximo 10 tabuadas por vez.<br>';
@@ -94,13 +142,11 @@ if(($this->tabuada_ate - $this->tabuada_num) <= 10) {
 } /* fecha Verifica se o número inicial é menor que o nº final */ 
 
 
-/* Mensagem de erro */
-echo "\n" . '<div class="msg_error">' . $tabuada_num_msg_erro . "\n" . '</div><!-- div msg_error -->';
+	return $this->tabuada_array;
 
 
 
-
-}/* close function setTabuada() */
+	} /* fecha function getTabuada */
 
 
 
@@ -110,7 +156,5 @@ echo "\n" . '<div class="msg_error">' . $tabuada_num_msg_erro . "\n" . '</div><!
 
 
 
-
-
-}/* close class Tabuada */
+} /* fecha class Tabuada */
 

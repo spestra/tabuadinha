@@ -11,10 +11,13 @@
 <content>
 <?php
 $caraca = new Tabuada(); 
-$caraca->tabuada_num = isset($_GET['tb']) ? $_GET['tb'] : false;
-$caraca->tabuada_ate = isset($_GET['ta']) ? $_GET['ta'] : false;
 
-$caraca->setTabuada();
+$tabuada_arrei = $caraca->getTabuada();
+
+echo '<pre>';
+print_r($tabuada_arrei);
+//echo($tabuada_arrei);
+echo '</pre>';
 
 ?>
 </content>
