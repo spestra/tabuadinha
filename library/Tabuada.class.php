@@ -14,6 +14,12 @@ class Tabuada {
 
 
 
+	public function setTabuada($tabuada_inicio=NULL, $tabuada_fim=NULL) { 
+
+			$this->tabuada_inicio = $tabuada_inicio;
+			$this->tabuada_fim = $tabuada_fim;
+
+	}/* close function setTabuada() */
 
 	
 
@@ -26,20 +32,20 @@ class Tabuada {
 
 	
 	/* Faz a limpeza dos dados do input tabuada início */
-	if(isset($this->tabuada_num)) {
-		$this->tabuada_num = strip_tags(trim($this->tabuada_num));
-		$this->tabuada_num = preg_replace("/[^0-9]+/", "", $this->tabuada_num);
+	if(isset($this->tabuada_inicio)) {
+		$this->tabuada_inicio = strip_tags(trim($this->tabuada_inicio));
+		$this->tabuada_inicio = preg_replace("/[^0-9]+/", "", $this->tabuada_inicio);
 		/* Verifica se tem número */
-		if(!is_numeric($this->tabuada_num)) {
-			$tabuada_num_msg_erro = 'Valor inválido. Informar número inteiro positivo. (1, 2, 3, 4, 5, 6...)';
+		if(!is_numeric($this->tabuada_inicio)) {
+			$tabuada_inicio_msg_erro = 'Valor inválido. Informar número inteiro positivo. (1, 2, 3, 4, 5, 6...)';
 		}
 	}
 	/* Faz a limpeza dos dados do input tabuada fim */
-	if(isset($this->tabuada_ate)) {
-		$this->tabuada_ate = strip_tags(trim($this->tabuada_ate));
-		$this->tabuada_ate = preg_replace("/[^0-9]+/", "", $this->tabuada_ate);
-		if(!is_numeric($this->tabuada_ate)) {
-			$tabuada_num_msg_erro = 'Valor inválido. Informar número inteiro positivo. (1, 2, 3, 4, 5, 6...)';
+	if(isset($this->tabuada_fim)) {
+		$this->tabuada_fim = strip_tags(trim($this->tabuada_fim));
+		$this->tabuada_fim = preg_replace("/[^0-9]+/", "", $this->tabuada_fim);
+		if(!is_numeric($this->tabuada_fim)) {
+			$tabuada_inicio_msg_erro = 'Valor inválido. Informar número inteiro positivo. (1, 2, 3, 4, 5, 6...)';
 		}
 	}
 	
@@ -47,30 +53,30 @@ class Tabuada {
 	
 	/* Se o nº da tabuada inínio for informado e o final não,
 	 mostra só uma tabuada na tela. Final recebe valor de inicio */
-	if(isset($this->tabuada_num)) {
-		if((!isset($this->tabuada_ate)) OR ($this->tabuada_ate == false)) {
-					$this->tabuada_ate = $this->tabuada_num;	
+	if(isset($this->tabuada_inicio)) {
+		if((!isset($this->tabuada_fim)) OR ($this->tabuada_fim == false)) {
+					$this->tabuada_fim = $this->tabuada_inicio;	
 				}
 	}
 	
 	/* Informou o final e NÃO informou o início	*/
-	if((!isset($this->tabuada_num)) OR ($this->tabuada_num == false)) {
-		if(isset($this->tabuada_ate)) {
-					$this->tabuada_num = $this->tabuada_ate;	
+	if((!isset($this->tabuada_inicio)) OR ($this->tabuada_inicio == false)) {
+		if(isset($this->tabuada_fim)) {
+					$this->tabuada_inicio = $this->tabuada_fim;	
 				}
 	}
 	
 	/* Se tudo estiver vazio */
-	if((!isset($this->tabuada_num)) OR ($this->tabuada_num == false)) {
-		if((!isset($this->tabuada_ate)) OR ($this->tabuada_ate == false)) {
-					$this->tabuada_num = 2;
-					$this->tabuada_ate = 10;	
+	if((!isset($this->tabuada_inicio)) OR ($this->tabuada_inicio == false)) {
+		if((!isset($this->tabuada_fim)) OR ($this->tabuada_fim == false)) {
+					$this->tabuada_inicio = 2;
+					$this->tabuada_fim = 10;	
 				}
 	}
 	
 	
 	/*  */
-	$tabuada_num_msg_erro = '  ';
+	$tabuada_inicio_msg_erro = '  ';
 	
 
 	/* --------- tratamento fim --------- */
@@ -79,30 +85,28 @@ class Tabuada {
 
 
 	/* Verifica se o número inicial é menor que o nº final */
-	if(is_numeric($this->tabuada_num) AND is_numeric($this->tabuada_ate) 
-	 AND $this->tabuada_num <= $this->tabuada_ate 
-	  AND $this->tabuada_num > 0) {
+	if(is_numeric($this->tabuada_inicio) AND is_numeric($this->tabuada_fim) 
+	 AND $this->tabuada_inicio <= $this->tabuada_fim 
+	  AND $this->tabuada_inicio > 0) {
 
 	/* Limite de tabuadas a serem exibidas */
-	if(($this->tabuada_ate - $this->tabuada_num) <= 10) {
-	 
-
-
-
-	 
+	if(($this->tabuada_fim - $this->tabuada_inicio) <= 10) {
 	 
 
 
 
 
-/* 12:54 22/8/2012 */
 
-$tabuada_inicio = 2;
-$tabuada_fim = 10;
+
+
+
+
+// $tabuada_inicio = 2;
+// $tabuada_fim = 10;
 $tabuada_completa = array();
 
 
-for($i = $tabuada_inicio; $i <= $tabuada_fim; $i++) {
+for($i = $this->tabuada_inicio; $i <= $this->tabuada_fim; $i++) {
 $tabuada_titulo_texto = 'Tabuado do nº ' . $i;
 
 $calculo_atual = array();
@@ -132,13 +136,13 @@ foreach ($tabuada_completa as $k1 => $k2) {
 
 
 }  else {
-	$tabuada_num_msg_erro .= "\n ";
-	$tabuada_num_msg_erro .= 'O limite de tabuadas a serem exibidas é maior que 10.<br > Só pode ser mostrado no máximo 10 tabuadas por vez.<br>';
+	$tabuada_inicio_msg_erro .= "\n ";
+	$tabuada_inicio_msg_erro .= 'O limite de tabuadas a serem exibidas é maior que 10.<br > Só pode ser mostrado no máximo 10 tabuadas por vez.<br>';
 } /* fecha Limite de tabuadas a serem exibidas */
 
 } else {
-	$tabuada_num_msg_erro .= "\n ";
-	$tabuada_num_msg_erro .= 'Número inicial é maior que o número final<br>';
+	$tabuada_inicio_msg_erro .= "\n ";
+	$tabuada_inicio_msg_erro .= 'Número inicial é maior que o número final<br>';
 } /* fecha Verifica se o número inicial é menor que o nº final */ 
 
 

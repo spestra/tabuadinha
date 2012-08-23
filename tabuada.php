@@ -8,18 +8,20 @@
 <header>
 <img src="images/tabuadinha_logotipo_png24.png" alt="Tabuadinha logotipo"><br><br>
 </header>
-<content>
+
 <?php
 $caraca = new Tabuada(); 
+// $caraca->tabuada_num = isset($_GET['tb']) ? $_GET['tb'] : false;
+// $caraca->tabuada_ate = isset($_GET['ta']) ? $_GET['ta'] : false;
 
-$tabuada_arrei = $caraca->getTabuada();
+$caraca->setTabuada(5, 10);
+$resultado_da_tabuada = $caraca->getTabuada();
 
 echo '<pre>';
-print_r($tabuada_arrei);
-//echo($tabuada_arrei);
+print_r($resultado_da_tabuada);
 echo '</pre>';
 
 ?>
-</content>
+
 <body>
 </html>
